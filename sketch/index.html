@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Notification Service Sketch</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+	<!-- Custom styles CSS -->
+	<style>
+	#notificationBlock{
+		position: absolute;
+		bottom: 5px;
+		right: 5px;
+	}
+	.notification{
+		z-index: 9999;
+		width: 300px;
+		height: auto;
+		margin: 5px !important;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		opacity: 0.5;
+		font-size: 80%
+	}
+	.notification:hover{
+		opacity: 1;
+	}
+	</style>	
+</head>
+<body>
+	<!-- Header -->
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Notification Service Sketch</a>
+		</div>
+	</nav>
+	<!-- Form -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<form class="form-horizontal" role="form" name="simulationForm" id="simulationForm">
+					<div class="form-group">
+						<legend>Use the Form to Simulate the Notification Service</legend>
+					</div>
+					<div class="form-group">
+						<label for="noteTitle" class="col-sm-2 control-label">Title</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="noteTitle" name="noteTitle" placeholder="Enter title of a notification" required/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="noteBody" class="col-sm-2 control-label">Body</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" rows="4" id="noteBody" name="noteBody" placeholder="Enter body of a notification" ></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="radio-inline" class="col-sm-2 control-label">Type</label>
+						<div class="col-sm-10">
+							<label class="radio-inline">
+								<input type="radio" name="noteType" id="noteType" value="info" > Info
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="noteType" id="noteType" value="warning"> Warning
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="noteType" id="noteType" value="error"> Error
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-10 col-sm-offset-2">
+							<button type="submit" class="btn btn-primary" id="simulateButton">Simulate</button>
+							<a href="" id="useMockup"class="btn btn-default">
+								Use Mockup Data
+							</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div id="notificationBlock">
+		<div class="alert alert-info alert-dismissible notification" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Title Info</strong> <br />Lorem ipsum dolor sit amet.
+		</div>
+		<div class="alert alert-warning alert-dismissible notification" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Title Warning</strong> <br />Lorem ipsum dolor sit amet.
+		</div>
+		<div class="alert alert-danger alert-dismissible notification" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Title Error</strong> <br />Lorem ipsum dolor sit amet.
+		</div>
+		<div class="alert alert-info alert-dismissible notification" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Title Info</strong> <br />Lorem ipsum dolor sit amet.
+		</div>
+		<div class="alert alert-warning alert-dismissible notification" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Title Warning</strong> <br />Lorem ipsum dolor sit amet.
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap JavaScript -->
+	<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- Script generating notifications -->
+	<script type="text/javascript">
+
+	// $('#simulateButton').click(function(e) {
+	// 	e.preventDefault();
+	// 	e.stopPropagation();
+	// 	$( '#simulationForm' ).each(function(){
+	// 		this.reset();
+	// 	});
+
+	// });
+
+</script>
+</body>
+</html>
