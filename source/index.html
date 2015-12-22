@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app = "Demo">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="styles/notification-service-styles.css">
 		
 </head>
-<body>
+<body ng-controller = 'DemoController'>
 	<!-- Header -->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
@@ -67,26 +67,10 @@
 		</div>
 	</div>
 	<!-- Notification block -->
-	<div id="notificationBlock">
+	<div id="notificationBlock" ng-repeat = "note in notes">
 		<div class="alert alert-info alert-dismissible notification" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>Title Info</strong> <br />Lorem ipsum dolor sit amet.
-		</div>
-		<div class="alert alert-warning alert-dismissible notification" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>Title Warning</strong> <br />Lorem ipsum dolor sit amet.
-		</div>
-		<div class="alert alert-danger alert-dismissible notification" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>Title Error</strong> <br />Lorem ipsum dolor sit amet.
-		</div>
-		<div class="alert alert-info alert-dismissible notification" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>Title Info</strong> <br />Lorem ipsum dolor sit amet.
-		</div>
-		<div class="alert alert-warning alert-dismissible notification" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>Title Warning</strong> <br />Lorem ipsum dolor sit amet.
+			<strong>{{ note.header }}</strong> <br /> {{ note.content }}
 		</div>
 	</div>
 
@@ -94,8 +78,9 @@
 	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap JavaScript -->
 	<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- Script generating notifications -->
-	
+	<script src="../bower_components/angular/angular.min.js"></script>
+	<!-- Scripts generating notifications -->
+	<script src="scripts/demo.js"></script>
 </script>
 </body>
 </html>
