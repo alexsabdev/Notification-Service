@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> Notification Service Sketch</title>
+	<title> Notification Service Demo</title>
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -17,60 +17,82 @@
 	<!-- Header -->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Notification Service Sketch</a>
+			<a class="navbar-brand" href="#">Notification Service Demo</a>
 		</div>
 	</nav>
 	<!-- Form -->
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
-				<form class="form-horizontal" role="form" name="simulationForm" id="simulationForm">
+				<form class="form-horizontal" role="form" name="simulationForm" id="simulationForm" ng-submit="createNote()">
 					<div class="form-group">
 						<legend>Use the Form to Simulate the Notification Service</legend>
 					</div>
 					<div class="form-group">
 						<label for="noteTitle" class="col-sm-2 control-label">Title</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="noteTitle" name="noteTitle" placeholder="Enter title of a notification" required/>
+							<input type="text" 
+							class="form-control" 
+							id="noteTitle" 
+							name="noteTitle" 
+							placeholder="Enter title of a notification" 
+							ng-model="note.header" 
+							required/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="noteBody" class="col-sm-2 control-label">Body</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" rows="4" id="noteBody" name="noteBody" placeholder="Enter body of a notification" ></textarea>
+							<textarea class="form-control" 
+							rows="4" id="noteBody" 
+							name="noteBody" 
+							placeholder="Enter body of a notification" 
+							ng-model="note.content" 
+							required></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="radio-inline" class="col-sm-2 control-label">Type</label>
 						<div class="col-sm-10">
 							<label class="radio-inline">
-								<input type="radio" name="noteType" id="noteType" value="info" > Info
+								<input type="radio" 
+								name="noteType" 
+								id="noteType" 
+								value="info" 
+								ng-model="note.category" 
+								required> Info
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="noteType" id="noteType" value="warning"> Warning
+								<input type="radio" 
+								name="noteType" 
+								id="noteType" 
+								value="warning"
+								ng-model="note.category" 
+								required> Warning
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="noteType" id="noteType" value="error"> Error
+								<input type="radio" 
+								name="noteType" 
+								id="noteType" 
+								value="danger"
+								ng-model="note.category" 
+								required> Error
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-10 col-sm-offset-2">
-							<button type="submit" class="btn btn-primary" id="simulateButton">Simulate</button>
-							<a href="" id="useMockup"class="btn btn-default">
+							<button type="submit" 
+							class="btn btn-primary" 
+							id="simulateButton"
+							>Simulate</button>
+							<a id="useMockup"class="btn btn-default" ng-click="useMockup()">
 								Use Mockup Data
 							</a>
 						</div>
 					</div>
 				</form>
 			</div>
-		</div>
-	</div>
-	<!-- Notification block -->
-	<div id="notificationBlock" ng-repeat = "note in notes">
-		<div class="alert alert-info alert-dismissible notification" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>{{ note.header }}</strong> <br /> {{ note.content }}
 		</div>
 	</div>
 
@@ -81,6 +103,7 @@
 	<script src="../bower_components/angular/angular.min.js"></script>
 	<!-- Scripts generating notifications -->
 	<script src="scripts/demo.js"></script>
+	<script src="scripts/notification-service.js"></script>
 </script>
 </body>
 </html>
