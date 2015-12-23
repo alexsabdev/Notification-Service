@@ -5,7 +5,7 @@ angular.module('notification-service', [])
 .service('Notification', function(){
 	// object to store notification options
 	var options = {
-		delay: 10000,
+		delay: 90000,
 		limit: 5,
 		startX: 5,
 		startY: 5,
@@ -59,10 +59,12 @@ angular.module('notification-service', [])
 		// setting a timeout for closing the aired alert
 		setTimeout(function() {
 			var target = document.getElementById(note.id);
-			buffer.splice(buffer.indexOf(target), 1);
-			allocate();
-			target.remove();
-			target.removeEventListener('click');
+			if (target) {
+				buffer.splice(buffer.indexOf(target), 1);
+				allocate();
+				target.remove();
+				target.removeEventListener('click');
+			}
 		}, options.delay);
 		// adding created alert to the array
 		buffer.push(templateNote);
