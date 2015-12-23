@@ -13,23 +13,29 @@ angular.module('notification-service', [])
 	};
 
 	var buffer = [];
+	var shift = 0;
 	
 
 	var allocate = function() {
 		var i = options.startX;
 		var j = options.startY;
 
+		for (var k in buffer) {
+			buffer[k].style.right = options.startX + 'px';
+			buffer[k].style.top = options.startY + 'px';
+			buffer[k].style.visibility = 'hidden';
+		}
 
+		if (buffer.length >= options.limit) {
+			shift = buffer.length - options.limit;
+		}
 
-		for (var n in buffer) {
+		for (var n = shift; n < buffer.length; n++) {
 
-
-
-				buffer[n].style.right = i + 'px';
-				buffer[n].style.top = j + 'px';
-				buffer[n].style.visibility = 'visible';
-				j += buffer[n].offsetHeight + options.spacingY;
-			
+			buffer[n].style.right = i + 'px';
+			buffer[n].style.top = j + 'px';
+			buffer[n].style.visibility = 'visible';
+			j += buffer[n].offsetHeight + options.spacingY;
 		}
 	};
 
