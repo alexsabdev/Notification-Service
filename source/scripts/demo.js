@@ -3,42 +3,40 @@
 angular.module('Demo', ['notification-service'])
 
 .controller('DemoController', ['$scope', 'Notification', function($scope, Notification){
-
+	// array to collect the notifications data
 	$scope.notes = [];
+	// object to keep track of input data
 	$scope.note = {
-			id: '',
-			from: 'userManagement',
-			category: 'danger',
-			header: 'Title Info',
-			content: 'Lorem ipsum dolor sit amet.',
-			type: 'note'
-		};
-
+		id: '',
+		from: 'userManagement',
+		category: '',
+		header: '',
+		content: '',
+		type: 'note'
+	};
+	// function to lazilly fill the form
 	$scope.useMockup = function() {
 		$scope.note = {
 			id: '',
 			from: 'userManagement',
-			category: 'danger',
+			category: 'error',
 			header: 'Title Info',
 			content: 'Lorem ipsum dolor sit amet.',
 			type: 'note'
 		};
 	};
-
+	// function to create a notification, save it, alert it and clean the form
 	$scope.createNote = function() {
 		$scope.note.id = $scope.notes.length + 1;
 		Notification.notify($scope.note);
 		$scope.notes.push($scope.note);
-		//console.log('created a note with ID ' + $scope.note.id);
-		//console.log('array now has ' + $scope.notes.length + ' notes');
 		$scope.note = {
 			id: '',
 			from: 'userManagement',
-			category: 'info',
-			header: 'Title Info',
-			content: 'Lorem ipsum dolor sit amet.',
+			category: '',
+			header: '',
+			content: '',
 			type: 'note'
 		};
 	};
-
 }]);
