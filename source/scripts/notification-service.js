@@ -5,8 +5,8 @@ angular.module('notification-service', [])
 .service('Notification', function(){
 
 	var options = {
-		delay: 3000,
-		limit: 3,
+		delay: 90000,
+		limit: 5,
 		startX: 5,
 		startY: 5,
 		spacingY: 5
@@ -15,7 +15,6 @@ angular.module('notification-service', [])
 	var buffer = [];
 	var shift = 0;
 	
-
 	var allocate = function() {
 		var i = options.startX;
 		var j = options.startY;
@@ -46,9 +45,25 @@ angular.module('notification-service', [])
 		var attId = document.createAttribute('id'); attId.value = note.id; templateNote.setAttributeNode(attId);
 		templateNote.innerHTML = '<strong>' + note.header + ' ' + note.id + '</strong> <br />' + note.content;
 		templateNote.style.visibility = 'hidden';
+		// var attCl = document.createAttribute('ng-click'); attCl.value = 'condole.log("hi")'; templateNote.setAttributeNode(attCl);
 		document.getElementsByTagName('body')[0].appendChild(templateNote);
+		templateNote.addEventListener('click', function() {
+			buffer.splice(buffer.indexOf(this), 1);
+			console.log(buffer);
+			allocate();
+			this.remove();
+			this.removeEventListener('click');
+		});
+		setTimeout(function() {
+			var target = document.getElementById(note.id);
+			buffer.splice(buffer.indexOf(target), 1);
+			console.log(buffer);
+			allocate();
+			target.remove();
+			target.removeEventListener('click');
+		}, options.delay);
 		buffer.push(templateNote);
 		allocate();
-	};
+		};
 
 });

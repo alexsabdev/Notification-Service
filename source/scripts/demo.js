@@ -8,7 +8,7 @@ angular.module('Demo', ['notification-service'])
 	$scope.note = {
 			id: '',
 			from: 'userManagement',
-			category: 'info',
+			category: 'danger',
 			header: 'Title Info',
 			content: 'Lorem ipsum dolor sit amet.',
 			type: 'note'
@@ -18,7 +18,7 @@ angular.module('Demo', ['notification-service'])
 		$scope.note = {
 			id: '',
 			from: 'userManagement',
-			category: 'info',
+			category: 'danger',
 			header: 'Title Info',
 			content: 'Lorem ipsum dolor sit amet.',
 			type: 'note'
@@ -34,9 +34,9 @@ angular.module('Demo', ['notification-service'])
 		$scope.note = {
 			id: '',
 			from: 'userManagement',
-			category: '',
-			header: '',
-			content: '',
+			category: 'info',
+			header: 'Title Info',
+			content: 'Lorem ipsum dolor sit amet.',
 			type: 'note'
 		};
 	};
