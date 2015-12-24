@@ -1,9 +1,28 @@
 'use_strict';
-
+/**
+ * $ngdoc module
+ * $name notification-service
+ * $description
+ *
+ * This is the notification-service module
+ */
 angular.module('notification-service', [])
-
+/**
+ * @ngdoc service
+ * @name Notification
+ * @description 
+ *
+ * This is the service of the notification-service module
+ */
 .service('Notification', function(){
-	// object to store notification options
+	/**
+	 * @ngdoc object
+	 * @name  options
+	 * @type object
+	 * @description
+	 *
+	 * object to collect options of the module service
+	 */
 	var options = {
 		delay: 90000,
 		limit: 5,
@@ -11,11 +30,30 @@ angular.module('notification-service', [])
 		startY: 5,
 		spacingY: 5
 	};
-	// array to keep track of called notifications
+	/**
+	 * @ngdoc array
+	 * @name  buffer
+	 * @type Array
+	 * @description
+	 *
+	 * array to keep track of called notifications
+	 */
 	var buffer = [];
-	// variable helping to display latest notification
+	/**
+	 * @ngdoc variable
+	 * @name shift
+	 * @description [description]
+	 *
+	 * variable helping to display latest notification
+	 */
 	var shift = 0;
-	// function to display latest notifications
+	/**
+	 * @ngdoc function
+	 * @name  allocate
+	 * @description
+	 *
+	 * procedure to display latest notifications
+	 */
 	var allocate = function() {
 		// variables to set starting position for alerts
 		var i = options.startX;
@@ -38,7 +76,13 @@ angular.module('notification-service', [])
 			j += buffer[n].offsetHeight + options.spacingY;
 		}
 	};
-	// function invoked when an alert is called
+	/**
+	 * @ngdoc function
+	 * @name notify
+	 * @description 
+	 *
+	 * procedure invoked when an alert is called
+	 */
 	this.notify = function(note) {
 		// create a template for an alert
 		var templateNote = document.createElement('div');
@@ -70,5 +114,5 @@ angular.module('notification-service', [])
 		buffer.push(templateNote);
 		// showing latest alerts
 		allocate();
-		};
+	};
 });

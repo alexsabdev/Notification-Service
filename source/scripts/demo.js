@@ -1,11 +1,34 @@
 'use_strict';
-
+/**
+ * @name  Demo
+ * @description 
+ *
+ * This is the module of the demo app
+ */
 angular.module('Demo', ['notification-service'])
-
+/**
+ * @name  DemoController
+ * @description 
+ *
+ * This is the main controller of the demo app module.
+ * It uses $scope and notification-service
+ */
 .controller('DemoController', ['$scope', 'Notification', function($scope, Notification){
-	// array to collect the notifications data
+	/**
+	 * @name $scope.notes
+	 * @type Array
+	 * @description 
+	 *
+	 * array to collect the notifications data
+	 */
 	$scope.notes = [];
-	// object to keep track of input data
+	/**
+	 * @name $scope.note
+	 * @type Object
+	 * @description 
+	 *
+	 * object to bind input data
+	 */
 	$scope.note = {
 		id: '',
 		from: 'userManagement',
@@ -14,7 +37,12 @@ angular.module('Demo', ['notification-service'])
 		content: '',
 		type: 'note'
 	};
-	// function to lazilly fill the form
+	/**
+	 * @name  $scope.useMockup
+	 * @description
+	 *
+	 * procedure to lazilly fill the form
+	 */
 	$scope.useMockup = function() {
 		$scope.note = {
 			id: '',
@@ -25,7 +53,12 @@ angular.module('Demo', ['notification-service'])
 			type: 'note'
 		};
 	};
-	// function to create a notification, save it, alert it and clean the form
+	/**
+	 * @name $scope.createNote
+	 * @description 
+	 *
+	 * precedure to create a notification, save it, alert it and clean the form
+	 */
 	$scope.createNote = function() {
 		$scope.note.id = $scope.notes.length + 1;
 		Notification.notify($scope.note);
