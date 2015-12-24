@@ -7,7 +7,7 @@ angular.module('Demo', ['notification-service'])
  * @description 
  * 
  * This is the main controller of the demo app module.
- * It uses the notification-service and operate with the simulation form.
+ * It uses the notification-service and operates with the simulation form.
  */
 .controller('DemoController', ['$scope', 'Notification', function($scope, Notification){
 	// array to collect the notifications data
