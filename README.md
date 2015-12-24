@@ -48,13 +48,14 @@ Notification.notify(note);
 ...
 ```
 * Where note is a notification object consisting of followsing properties:
-* * id: The id of the notification message.
-* * from: Identifier of the emitter.
-* * category: Category of the notification message. Possible categories are “info”, “warning” and “error”.
-* * type: Type of the notification – Possible types for the sevice version are “note”.
-* * header: Header of the notification.
-* * content: Content of the notification.
+<br />   id: The id of the notification message.
+<br />   from: Identifier of the emitter.
+<br />   category: Category of the notification message. Possible categories are “info”, “warning” and “error”.
+<br />   type: Type of the notification – Possible types for the sevice version are “note”.
+<br />   header: Header of the notification.
+<br />   content: Content of the notification.
 ## Greetings
+Thanks to T-Systems for the code challenge. <br />
 Please get in touch with me if your have proposals how to modify the service.<br />
 Thanks! <br />
 Have fun!
