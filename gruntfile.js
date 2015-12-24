@@ -53,22 +53,22 @@ module.exports = function(grunt) {
 				src: ['source/scripts/*.js']
 			}
 		},
-		concat: {
-			dist: {
-				src: ['source/scripts/notification-service.js', 'source/scripts/demo.js'],
-				dest: 'demo/scripts/main.js'
-			}
-		},
-		uglify: {
-			options: {
-				stripBanners: true,
-				banner: '/* <%= pkg.name %> -v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-			},
-			build: {
-				src: 'demo/scripts/main.js',
-				dest: 'demo/scripts/main.js'
-			}
-		},
+		// concat: {
+		// 	dist: {
+		// 		src: ['source/scripts/notification-service.js', 'source/scripts/demo.js'],
+		// 		dest: 'demo/scripts/main.js'
+		// 	}
+		// },
+		// uglify: {
+		// 	options: {
+		// 		stripBanners: true,
+		// 		banner: '/* <%= pkg.name %> -v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+		// 	},
+		// 	build: {
+		// 		src: 'demo/scripts/main.js',
+		// 		dest: 'demo/scripts/main.js'
+		// 	}
+		// },
 		// cssmin: {
 		// 	with_banner: {
 		// 		options: {
