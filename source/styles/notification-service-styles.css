@@ -9,9 +9,12 @@
 	position: absolute;
 	top: 0px;
 	right: 0px;
-
 	border: 1px solid transparent;
 	border-radius: 4px;
+  -o-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 .notification:hover{
 	opacity: 1;
