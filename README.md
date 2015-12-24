@@ -54,6 +54,7 @@ Notification.notify(note);
 <br />   type: Type of the notification – Possible types for the sevice version are “note”.
 <br />   header: Header of the notification.
 <br />   content: Content of the notification.
+
 ## Greetings
 Thanks to T-Systems for the code challenge. <br />
 Please get in touch with me if your have proposals how to modify the service.<br />
