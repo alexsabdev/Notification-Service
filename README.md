@@ -23,15 +23,30 @@ notification-service - Angular.js service providing notifications using Bootstra
 
 ## How to use:
 * Simply inject the notification-service to your app module:
-   var app = angular.module('myApp', ['notification-service']);
+```bash
+var app = angular.module('myApp', ['notification-service']);
+...
+```
 * And inject its service called 'Notification' to the app controller:
-   app.controller('AppController', ['$scope', 'Notification', function($scope, Notification){...}]);
+```bash
+...
+app.controller('AppController', ['$scope', 'Notification', function($scope, Notification){...}]);
+```
 * You need also to download notification-service.js and notification-service-styles.css from the dist folder.
 Don't forget to link downloaded files to your html/template:
-   <link rel="stylesheet" href="styles/notification-service-styles.css">
-   <script src="scripts/notification-service.js"></script>
+```bash
+...
+<link rel="stylesheet" href="styles/notification-service-styles.css">
+...
+<script src="scripts/notification-service.js"></script>
+...
+```
 * After injection, when you need to show notifications, simply call (javascript):
-   Notification.notify(note);
+```bash
+...
+Notification.notify(note);
+...
+```
 * Where note is a notification object consisting of followsing properties:
 * * id: The id of the notification message.
 * * from: Identifier of the emitter.
