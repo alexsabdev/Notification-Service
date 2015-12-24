@@ -69,19 +69,28 @@ module.exports = function(grunt) {
 				dest: 'demo/scripts/main.js'
 			}
 		},
-		cssmin: {
-			with_banner: {
-				options: {
-					banner: '/* My minified CSS */'
-				},
-				files: { 'demo/style/main.min.css' : ['source/styles/notification-service-styles.css']
-				}
+		// cssmin: {
+		// 	with_banner: {
+		// 		options: {
+		// 			banner: '/* My minified CSS */'
+		// 		},
+		// 		files: { 'demo/style/main.min.css' : ['source/styles/notification-service-styles.css']
+		// 		}
+		// 	}
+		// },
+		useminPrepare: {
+			html: 'source/index.html',
+			options: {
+				dest: 'demo/'
 			}
 		},
-		removeLogging: {
-			build: {
-				src: 'demo/scripts/main.js',
-				dest: 'demo/scripts/main.min.js'
+		usemin: {
+			html: ['demo/index.html']
+		},
+		copy: {
+			task0: {
+				src: 'source/index.html',
+				dest: 'demo/index.html'
 			}
 		}
 
@@ -94,7 +103,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-remove-logging');
+	grunt.loadNpmTasks('grunt-usemin');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+
 	grunt.registerTask('default', ['express', 'watch']);
-	grunt.registerTask('demo', ['concat','uglify','cssmin']);
+	grunt.registerTask('demo', ['copy:task0','useminPrepare','concat','uglify','cssmin', 'usemin']);
 };

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app = "Demo">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Notification Service Demo</title>
+	<link rel="stylesheet" href="styles/main.css">
+</head>
+<body ng-controller = 'DemoController'>
+	<!-- Navbar -->
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Notification Service Demo</a>
+		</div>
+	</nav>
+	<!-- Form -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<form class="form-horizontal" role="form" name="simulationForm" id="simulationForm" ng-submit="createNote()">
+					<div class="form-group" style="text-align:center">
+						<legend style="center">Use the Form to Simulate the Notification Service</legend>
+					</div>
+					<div class="form-group">
+						<label for="noteTitle" class="col-sm-2 control-label">Title</label>
+						<div class="col-sm-10">
+							<input type="text" 
+							class="form-control" 
+							id="noteTitle" 
+							name="noteTitle" 
+							placeholder="Enter the title of your notification" 
+							ng-model="note.header" 
+							required/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="noteBody" class="col-sm-2 control-label">Body</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" 
+							rows="4" id="noteBody" 
+							name="noteBody" 
+							placeholder="Enter the body of your notification" 
+							ng-model="note.content" 
+							required></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="radio-inline" class="col-sm-2 control-label">Type</label>
+						<div class="col-sm-10">
+							<label class="radio-inline">
+								<input type="radio" 
+								name="noteType" 
+								id="noteType" 
+								value="info" 
+								ng-model="note.category" 
+								required> Info
+							</label>
+							<label class="radio-inline">
+								<input type="radio" 
+								name="noteType" 
+								id="noteType" 
+								value="warning"
+								ng-model="note.category" 
+								required> Warning
+							</label>
+							<label class="radio-inline">
+								<input type="radio" 
+								name="noteType" 
+								id="noteType" 
+								value="error"
+								ng-model="note.category" 
+								required> Error
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-10 col-sm-offset-2">
+							<button type="submit" 
+							class="btn btn-primary" 
+							id="simulateButton"
+							>Simulate</button>
+							<a id="useMockup"class="btn btn-default" ng-click="useMockup()">
+								Fill with mock data
+							</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="scripts/main.js"></script>
+</body>
+</html>
