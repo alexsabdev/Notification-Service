@@ -59,25 +59,25 @@ module.exports = function(grunt) {
 		// 		dest: 'demo/scripts/main.js'
 		// 	}
 		// },
-		// uglify: {
-		// 	options: {
-		// 		stripBanners: true,
-		// 		banner: '/* <%= pkg.name %> -v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-		// 	},
-		// 	build: {
-		// 		src: 'demo/scripts/main.js',
-		// 		dest: 'demo/scripts/main.js'
-		// 	}
-		// },
-		// cssmin: {
-		// 	with_banner: {
-		// 		options: {
-		// 			banner: '/* My minified CSS */'
-		// 		},
-		// 		files: { 'demo/style/main.min.css' : ['source/styles/notification-service-styles.css']
-		// 		}
-		// 	}
-		// },
+		uglify: {
+			options: {
+				stripBanners: true,
+				banner: '/* <%= pkg.name %> -v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+			},
+			build: {
+				src: 'dist/notification-service.js',
+				dest: 'dist/notification-service.min.js'
+			}
+		},
+		cssmin: {
+			with_banner: {
+				options: {
+					banner: '/* My minified CSS */'
+				},
+				files: { 'dist/notification-service-styles.min.css' : ['dist/notification-service-styles.css']
+				}
+			}
+		},
 		useminPrepare: {
 			html: 'source/index.html',
 			options: {
@@ -91,6 +91,14 @@ module.exports = function(grunt) {
 			task0: {
 				src: 'source/index.html',
 				dest: 'demo/index.html'
+			},
+			task1: {
+				src: 'source/scripts/notification-service.js',
+				dest: 'dist/notification-service.js'
+			},
+			task2: {
+				src: 'source/styles/notification-service-styles.css',
+				dest: 'dist/notification-service-styles.css'
 			}
 		}
 
@@ -108,4 +116,5 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['express', 'watch']);
 	grunt.registerTask('demo', ['copy:task0','useminPrepare','concat','uglify','cssmin', 'usemin']);
+	grunt.registerTask('dist', ['copy:task1', 'copy:task2', 'cssmin', 'uglify']);
 };
