@@ -55,8 +55,7 @@ angular.module('notification-service', [])
 	this.notify = function(note) {
 		// create a template for an alert
 		var templateNote = document.createElement('div');
-		templateNote.className = 'alert alert-' + note.category + ' notification';
-		var att = document.createAttribute('role'); att.value = 'alert'; templateNote.setAttributeNode(att);
+		templateNote.className = 'ns-alert-' + note.category + ' notification';
 		var attId = document.createAttribute('id'); attId.value = note.id; templateNote.setAttributeNode(attId);
 		templateNote.innerHTML = '<strong>' + note.header + ' ' + note.id + '</strong> <br />' + note.content;
 		templateNote.style.visibility = 'hidden';
