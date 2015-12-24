@@ -21,12 +21,22 @@ angular.module('Demo', ['notification-service'])
 	};
 	//procedure to lazilly fill the form
 	$scope.useMockup = function() {
+		
 		$scope.note = {
 			id: '',
-			category: 'error',
-			header: 'Title Info',
+			header: 'Title',
 			content: 'Lorem ipsum dolor sit amet.',
 		};
+
+		switch(Math.floor(Math.random()*3)) {
+			case 0 : $scope.note.category = 'info';
+				break;
+			case 1 : $scope.note.category = 'warning';
+				break;
+			case 2 : $scope.note.category = 'error';
+				break;
+		}
+
 	};
 	// precedure to create a notification, save it, alert it and clean the form
 	$scope.createNote = function() {
