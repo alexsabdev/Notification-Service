@@ -17,6 +17,7 @@
 	right: 0px;
 	border: 1px solid transparent;
 	border-radius: 4px;
+	position: fixed;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
