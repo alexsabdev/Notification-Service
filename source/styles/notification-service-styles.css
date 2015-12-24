@@ -1,3 +1,9 @@
+/**
+ * noficication-service styles
+ * @author alexsabdev (alexsabdev@gmail.com)
+ * @version v1.0.0
+ * @link https://github.com/alexsabdev/notification-service.git
+ */
 .notification{
 	z-index: 9999;
 	width: 250px;
@@ -11,8 +17,6 @@
 	right: 0px;
 	border: 1px solid transparent;
 	border-radius: 4px;
-  -o-transition: all 0.5s;
-  -moz-transition: all 0.5s;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
