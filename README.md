@@ -49,9 +49,7 @@ Notification.notify(note);
 ```
 * Where note is a notification object consisting of followsing properties:
 <br />   id: The id of the notification message.
-<br />   from: Identifier of the emitter.
 <br />   category: Category of the notification message. Possible categories are “info”, “warning” and “error”.
-<br />   type: Type of the notification – Possible types for the sevice version are “note”.
 <br />   header: Header of the notification.
 <br />   content: Content of the notification.
 
