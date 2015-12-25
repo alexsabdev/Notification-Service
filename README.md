@@ -5,7 +5,7 @@ notification-service - angular.js service providing notifications using Bootstra
 * author alexsabdev (alexsabdev@gmail.com)
 * version v1.0.0
 * link https://github.com/alexsabdev/notification-service.git
-* dependencies: no
+* dependencies: no dependencies, it works as a separate module, ready to be injected
 
 ## Features
 * tt displays notifications as overlay in fromt of the page;
@@ -15,13 +15,6 @@ notification-service - angular.js service providing notifications using Bootstra
 * when the limit is reached, the oldest notification temporary gets off from screen and the latest pops up and after that gets back when there's a free spot;
 * created notifications are closable by clicking;
 * they are also closed automatically after 90 seconds.
-
-## Options
-* delay: 90000 (in miliseconds, period after that a notification is automatically closed);
-* limit: 5 (number of notifications on screen);
-* startX: 5 (in px, starting position form the right for the first notifiation);
-* startY: 5 (in px, starting position form the left for the first notifiation);
-* spacingY: 5 (in px, distance bentween notifications)
 
 ## How to use:
 * Simply inject the notification-service to your app module:
