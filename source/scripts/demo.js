@@ -17,7 +17,7 @@ angular.module('Demo', ['notification-service'])
 		id: '',
 		category: 'info',
 		header: '',
-		content: '',
+		content: ''
 	};
 	//procedure to lazilly fill the form
 	$scope.useMockup = function() {
@@ -25,7 +25,7 @@ angular.module('Demo', ['notification-service'])
 		$scope.note = {
 			id: '',
 			header: 'Title',
-			content: 'Lorem ipsum dolor sit amet.',
+			content: 'Lorem ipsum dolor sit amet.'
 		};
 
 		switch(Math.floor(Math.random()*3)) {
@@ -47,7 +47,7 @@ angular.module('Demo', ['notification-service'])
 			id: '',
 			category: 'info',
 			header: '',
-			content: '',
+			content: ''
 		};
 	};
 }]);
