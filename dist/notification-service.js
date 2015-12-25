@@ -54,14 +54,16 @@ angular.module('notification-service', [])
 	// procedure invoked when an alert is called
 	this.notify = function(note) {
 		// handling incorrect input data
-		if (!note.id) 
+		if (!note.id)
 			note.id = 'und' + (new Date).getTime();
-		if (!note.category)
-			note.category = 'error';
 		if (!note.header)
 			note.header = 'NO HEADER';
 		if (!note.content)
-			note.content = 'NO CONTENT';
+			note.content += 'NO CONTENT';
+		if (!note.category) {
+			note.category = 'error';
+			note.content = 'NO CATEGORY ' + note.content;
+		}
 		// create a template for an alert
 		var templateNote = document.createElement('div');
 		templateNote.className = 'ns-alert-' + note.category + ' notification';
