@@ -15,7 +15,9 @@ angular.module('Demo', ['notification-service'])
 	// object to bind input data
 	$scope.note = {
 		id: '',
+		from: 'userManagement',
 		category: 'info',
+		type: 'note',
 		header: '',
 		content: ''
 	};
@@ -23,8 +25,7 @@ angular.module('Demo', ['notification-service'])
 	$scope.useMockup = function() {
 		
 		$scope.note = {
-			id: '',
-			header: 'Title',
+			header: 'Header',
 			content: 'Lorem ipsum dolor sit amet.'
 		};
 
@@ -37,6 +38,15 @@ angular.module('Demo', ['notification-service'])
 				break;
 		}
 
+		switch(Math.floor(Math.random()*3)) {
+			case 0 : $scope.note.type = 'note';
+				break;
+			case 1 : $scope.note.type = 'ok_confirm';
+				break;
+			case 2 : $scope.note.type = 'ok_cancel_confirm';
+				break;
+		}
+
 	};
 	// precedure to create a notification, save it, alert it and clean the form
 	$scope.createNote = function() {
@@ -45,7 +55,9 @@ angular.module('Demo', ['notification-service'])
 		$scope.notes.push($scope.note);
 		$scope.note = {
 			id: '',
+			from: 'userManagement',
 			category: 'info',
+			type: 'note',
 			header: '',
 			content: ''
 		};
