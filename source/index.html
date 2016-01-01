@@ -54,27 +54,56 @@
 						<div class="col-sm-10">
 							<label class="radio-inline">
 								<input type="radio" 
-								name="noteType" 
-								id="noteType" 
+								name="noteCategory" 
+								id="noteCategory" 
 								value="info" 
 								ng-model="note.category" 
 								required> Info
 							</label>
 							<label class="radio-inline">
 								<input type="radio" 
-								name="noteType" 
-								id="noteType" 
+								name="noteCategory" 
+								id="noteCategory" 
 								value="warning"
 								ng-model="note.category" 
 								required> Warning
 							</label>
 							<label class="radio-inline">
 								<input type="radio" 
-								name="noteType" 
-								id="noteType" 
+								name="noteCategory" 
+								id="noteCategory" 
 								value="error"
 								ng-model="note.category" 
 								required> Error
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="radio-inline" class="col-sm-2 control-label">Type</label>
+						<div class="col-sm-10">
+							<label class="radio-inline">
+								<input type="radio"
+								name="noteType"
+								id="noteType"
+								value="note"
+								ng-model="note.type"
+								required> Note
+							</label>
+							<label class="radio-inline">
+								<input type="radio"
+								name="noteType"
+								id="noteType"
+								value="ok_confirm"
+								ng-model="note.type"
+								required> Ok confirm
+							</label>
+							<label class="radio-inline">
+								<input type="radio"
+								name="noteType"
+								id="noteType"
+								value="ok_cancel_confirm"
+								ng-model="note.type"
+								required> Ok cancel confirm
 							</label>
 						</div>
 					</div>
