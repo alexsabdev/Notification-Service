@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 			},
 			scripts: {
 				files: 'source/scripts/**/*.js',
-				tasks: 'ngdocs'
+				tasks: ''
 			},
 			styles: {
 				files: 'source/styles/**/*.css',
