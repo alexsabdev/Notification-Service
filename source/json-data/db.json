@@ -58,35 +58,5 @@
     }
   ],
   "confirm": [
-    {
-      "id": 104,
-      "from": "userManagement",
-      "result": 1
-    },
-    {
-      "id": 102,
-      "from": "userManagement",
-      "result": 1
-    },
-    {
-      "id": 105,
-      "from": "userManagement",
-      "result": 1
-    },
-    {
-      "id": 103,
-      "from": "userManagement",
-      "result": 1
-    },
-    {
-      "id": 106,
-      "from": "userManagement",
-      "result": 0
-    },
-    {
-      "id": 101,
-      "from": "userManagement",
-      "result": 1
-    }
   ]
 }
