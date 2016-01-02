@@ -37,7 +37,6 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', function($r
 	};
 	// procedure to send the user response
 	scope.sendResponse = function(item, answer) {
-		console.log(item);
 		$http({
 			url: scope.options.baseUrl + 'confirm',
 			method: "POST",
