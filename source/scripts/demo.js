@@ -25,6 +25,7 @@ angular.module('Demo', ['notification-service'])
 	$scope.useMockup = function() {
 		
 		$scope.note = {
+			from: 'userManagement',
 			header: 'Header',
 			content: 'Lorem ipsum dolor sit amet.'
 		};
@@ -61,5 +62,8 @@ angular.module('Demo', ['notification-service'])
 			header: '',
 			content: ''
 		};
+	};
+	$scope.get = function() {
+		Notification.getFromServer();
 	};
 }]);
