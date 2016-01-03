@@ -21,7 +21,7 @@
 	<!-- Form -->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+			<div class="col-md-8 col-md-offset-2">
 				<form class="form-horizontal" role="form" name="simulationForm" id="simulationForm" ng-submit="createNote()">
 					<div class="form-group" style="text-align:center">
 						<legend style="center">Use the Form to Simulate the Notification Service</legend>
@@ -116,12 +116,38 @@
 							<a id="useMockup"class="btn btn-default" ng-click="useMockup()">
 								Fill with mock data
 							</a>
-							<a id="af"class="btn btn-default" ng-click="get()">
-								Fetch from server
+							<a id="getFromServer" class="btn btn-default"
+							data-toggle="modal" data-target="#myModal">
+							Fetch from server
 							</a>
 						</div>
 					</div>
 				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">How to Simulate Fetching from Server</h4>
+				</div>
+				<div class="modal-body">
+					<ul> Steps
+						<li>First of all, be sure you have nodejs and npm installed on your computer.</li>
+						<li>Then using your terminal please install json-server globally: <pre>sudo npm install json-server -g</pre></li>
+						<li>After that go to the json-data subfolder (assuming you're in the demo folder):<pre>cd json-data</pre></li>
+						<li>Run the json-server using following command: <pre>json-server --watch db-json</pre></li>
+						<li>Now you can click on the bellow button to simulate fetching notifications from the server:<br /> <a id="getFromServer" class="btn btn-default" ng-click="get()">Fetch now!</a>
+						</li>
+						<li>After simulation you can terminate the json-server by pressing CTRL+C in the termial window where you ran the server.</li>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -131,6 +157,7 @@
 	<script src="../bower_components/angular/angular.min.js"></script>
 	<script src="scripts/demo.js"></script>
 	<script src="scripts/notification-service.js"></script>
+	<script src="../bower_components/angular-mocks/angular-mocks.js"></script>
 	<!-- endbuild -->
 </body>
 </html>
