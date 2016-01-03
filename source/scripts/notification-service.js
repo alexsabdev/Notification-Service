@@ -14,30 +14,36 @@
 * <strong>Checkout README.MD for detailed instructions!</strong>
 * 
 */
-nsModule.controller('Notification', ['$scope', '$compile', '$http', function($scope, $compile, $http){
+nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout', function($rootScope, $compile, $http, $timeout){
 	// scope for the service
+	var scope = $rootScope.$new();
 	// object for the service options
-	$scope.options = {
-		delay: 90000,
+	scope.options = {
+		delay: 10000,
 		limit: 5,
 		baseUrl: 'http://localhost:3000/'
 	};
+	// procedure to set new options
+	this.setOptions = function(opts) {
+		if (!angular.isObject(opts)) throw new Error("Options should be an object!");
+		scope.options = angular.extend({}, scope.options, opts);
+	};
 	// array to keep track of incoming alerts
-	$scope.buffer = [];
+	scope.buffer = [];
 	// variable to keep track if the notification area is displayed or not
-	$scope.isDisplayed = false;
+	scope.isDisplayed = false;
 	// procedure to kill the alert
-	$scope.kill = function(item) {
-		$scope.buffer.splice($scope.buffer.indexOf(item), 1);
-		if ($scope.buffer.length === 0) {
-			$scope.isDisplayed = false;
+	scope.kill = function(item) {
+		scope.buffer.splice(scope.buffer.indexOf(item), 1);
+		if (scope.buffer.length === 0) {
+			scope.isDisplayed = false;
 			angular.element(document.getElementById('notification-area')).remove();
 		}
 	};
 	// procedure to send the user response
-	$scope.sendResponse = function(item, answer) {
+	scope.sendResponse = function(item, answer) {
 		$http({
-			url: $scope.options.baseUrl + 'confirm',
+			url: scope.options.baseUrl + 'confirm',
 			method: "POST",
 			data: {
 				'id': item.id,
@@ -51,7 +57,7 @@ nsModule.controller('Notification', ['$scope', '$compile', '$http', function($sc
 		function(response) {
 			console.log('POST error');
 		});
-		$scope.kill(item);
+		scope.kill(item);
 	};
 	// template for notifications
 	var template =
@@ -63,41 +69,36 @@ nsModule.controller('Notification', ['$scope', '$compile', '$http', function($sc
 	'<button class="ns-btn ns-btn-xs ns-btn-{{item.category}}" ng-show="item.type!==\'note\'" ng-click="sendResponse(item,1)">OK</button>' +
 	'<button class="ns-btn ns-btn-xs ns-btn-{{item.category}}" ng-show="(item.type!==\'note\')&&(item.type!==\'ok_confirm\')" ng-click="sendResponse(item,0)">Cancel</button>' +
 	'</li></ul>';
-	// procedure to set new options
-	$scope.setOptions = function(opts) {
-		if (!angular.isObject(opts)) throw new Error("Options should be an object!");
-		$scope.options = angular.extend({}, $scope.options, opts);
+	// procedure to add an alert to the buffer
+	var pushToBuffer = function(note) {
+		scope.buffer.push(note);
+		if (!scope.isDisplayed) {
+			angular.element(document.getElementsByTagName('body')).append($compile(template)(scope));
+			scope.isDisplayed = true;
+		}
+		$timeout(function() {
+			scope.buffer.splice(scope.buffer.indexOf(note),1);
+			if (scope.buffer.length === 0) {
+				scope.isDisplayed = false;
+				angular.element(document.getElementById('notification-area')).remove();
+			}
+		},scope.options.delay);
 	};
 	// procedure to air the alert
-	$scope.notify = function(note) {
-		$scope.buffer.push(note);
-		if (!$scope.isDisplayed) {
-			angular.element(document.getElementsByTagName('body')).append($compile(template)($scope));
-			$scope.isDisplayed = true;
-		}
-		window.setTimeout(function() {
-			var toKill = angular.element(document.getElementById('ns-' + note.id))[0];
-			if (toKill) {
-				toKill.remove();
-				$scope.buffer.splice($scope.buffer.indexOf(note),1);
-			}
-		},$scope.options.delay);
+	this.notify = function(note) {
+		pushToBuffer(note);
 	};
 	// procedure to get notifications from server
-	$scope.getFromServer = function() {
+	this.getFromServer = function() {
 		$http({
-			url: $scope.options.baseUrl + 'list',
+			url: scope.options.baseUrl + 'list',
 			method: "GET",
 		})
 		.then(function(response) {
 			console.log('GET success');
 			var noteArray = response.data;
 			for (var i = 0; i < noteArray.length; i++)
-				$scope.buffer.push(noteArray[i]);
-			if (!$scope.isDisplayed) {
-				angular.element(document.getElementsByTagName('body')).append($compile(template)($scope));
-				$scope.isDisplayed = true;
-			}
+				pushToBuffer(noteArray[i]);
 		},
 		function(response) {
 			console.log('GET error');
