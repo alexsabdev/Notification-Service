@@ -19,7 +19,7 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 	var scope = $rootScope.$new();
 	// object for the service options
 	scope.options = {
-		delay: 10000,
+		delay: 90000,
 		limit: 5,
 		baseUrl: 'http://localhost:3000/'
 	};
