@@ -54,12 +54,6 @@ module.exports = function(grunt) {
 				src: ['source/scripts/*.js']
 			}
 		},
-		// concat: {
-		// 	dist: {
-		// 		src: ['source/scripts/notification-service.js', 'source/scripts/demo.js'],
-		// 		dest: 'demo/scripts/main.js'
-		// 	}
-		// },
 		uglify: {
 			options: {
 				stripBanners: true,
@@ -73,7 +67,7 @@ module.exports = function(grunt) {
 		cssmin: {
 			with_banner: {
 				options: {
-					banner: '/* My minified CSS */'
+					banner: '/* <%= pkg.name %> -v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 				},
 				files: { 'dist/notification-service-styles.min.css' : ['dist/notification-service-styles.css']
 			}
