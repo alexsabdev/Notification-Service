@@ -1,18 +1,64 @@
 /**
- * noficication-service
- * @author alexsabdev (alexsabdev@gmail.com)
- * @version v1.0.0
- * @link https://github.com/alexsabdev/notification-service.git
+ * @ngdoc object
+ * @name notification-service
+ * @description
+ *
+ * Angular.js module providing notifications using Bootstrap 3 styles and having following features:
+ * 
+ * # Features
+ * * it displays notifications as overlay in front of the page;
+ * * the notifications have a title and a body;
+ * * they have different appearance depending on a category;
+ * * max 5 notifications are displayed at the same time by dafault, the number can be changed;
+ * * when the limit is reached, the oldest notification temporary gets off from screen and the latest pops up and after that gets back when there's a free spot;
+ * * created notifications are closable by clicking;
+ * * they are also closed automatically after 90 seconds by default, the number can be changed;
+ * * the service is able to display notifications with confirmations;
+ * * the service can read data from backend side and can send data to it.
+ *
+ * # Install
+ *
+ *
+ * * Simply inject the notification-service to your app module:
+ * ```javascript
+ * var app = angular.module('myApp', ['notification-service']);
+ * ...
+ * ```
+ * * And inject its service called 'Notification' to the app controller:
+ * ```javascript
+ * ...
+ * app.controller('AppController', ['$scope', 'Notification', function($scope, Notification){...}]);
+ * ```
+ * * You need also to download notification-service.js and notification-service-styles.css from the dist folder (or their minified versions). Don't forget to link downloaded files to your html/template:
+ * ```html
+ * ...
+ * <link rel="stylesheet" href="styles/notification-service-styles.css">
+ * ...
+ * <script src="scripts/notification-service.js"></script>
+ * ...
+ * ```
+ * * The notification-service has ability to read data from server and send user responds to it. In order to use this feature, you need to set baseUrl for your server interface. :
+ * ```javascript
+ * ...
+ * Notification.setOptions({baseUrl: 'http://myserver.com/api/notifications/'})
+ * ...
+ * ```
+ * ! notifications will be fetched using interface: baseUrl + '/list';<br />
+ * ! user responds will be sent using interface: baseUrl + '/confirm'.
+ * # Usage
+ * The module contains the service named Notification having 3 public methods. You can call them in your app controller in order to get corresponding effect. Please refer to the Notification service section for details.
  */
  var nsModule = angular.module('notification-service', []);
 /**
 * @ngdoc service
 * @name notification-service.service:Notification
+* @requires $rootScope
+* @requires $compile
+* @requires $http
+* @requires $timeout
 * @description 
 *
-* notification-service - Angular.js service providing notifications using Bootstrap 3 styles with css transition animation. It creates overlay notifications on window. Number of notifications is limited by options.limit. When the limit is reached, the oldest notification temporary gets off from screen and the latest pops up. And after that gets back when there's a free spot. Created notifications are closable by clicking. They are also selfclosed within period of options.delay.
-* <strong>Checkout README.MD for detailed instructions!</strong>
-* 
+* Service to display notifications, talk to server and change default notification settings.
 */
 nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout', function($rootScope, $compile, $http, $timeout){
 	// scope for the service
@@ -23,7 +69,40 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 		limit: 5,
 		baseUrl: 'http://localhost:3000/'
 	};
-	// procedure to set new options
+	/**
+	 * @ngdoc
+	 * @name setOptions
+	 * @methodOf notification-service.service:Notification
+	 * @param {Object} opts object containing options of the notification service
+	 * @description 
+	 * 
+	 * Method to change default options of the notification service.
+	 *
+	 * # Usage
+	 * In your app controller you can call:
+	 * ```javascript
+	 * Notification.setOptions(opts);
+	 * ```
+	 * where ```opts``` is an object that can contain following properties:
+	 * * delay - delay of the notification in ms, type: Int;
+	 * * limit - max amount of notifications on screen at the same time, type: Int;
+	 * * baseUrl - path to the server to get notifications from, type: String. Please mind:
+	 * <br />! notifications will be fetched using interface: baseUrl + '/list';<br />
+	 * ! user responds will be sent using interface: baseUrl + '/confirm';
+	 *
+	 * @example
+	 * ```javascript
+	 * ...
+	 * Notification.setOptions(
+	 * {
+	 *   delay: 45000,
+	 *   limit: 3,
+	 *   baseUrl: http://website.com/api/notifications'
+	 * }
+	 * );
+	 * ...
+	 * ```
+	 */
 	this.setOptions = function(opts) {
 		if (!angular.isObject(opts)) throw new Error("Options should be an object!");
 		scope.options = angular.extend({}, scope.options, opts);
@@ -32,7 +111,7 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 	scope.buffer = [];
 	// variable to keep track if the notification area is displayed or not
 	scope.isDisplayed = false;
-	// procedure to kill the alert
+	// method to kill the alert
 	scope.kill = function(item) {
 		scope.buffer.splice(scope.buffer.indexOf(item), 1);
 		if (scope.buffer.length === 0) {
@@ -40,7 +119,7 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 			angular.element(document.getElementById('notification-area')).remove();
 		}
 	};
-	// procedure to send the user response
+	// method to send the user response
 	scope.sendResponse = function(item, answer) {
 		$http({
 			url: scope.options.baseUrl + 'confirm',
@@ -69,7 +148,7 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 	'<button class="ns-btn ns-btn-xs ns-btn-{{item.category}}" ng-show="item.type!==\'note\'" ng-click="sendResponse(item,1)">OK</button>' +
 	'<button class="ns-btn ns-btn-xs ns-btn-{{item.category}}" ng-show="(item.type!==\'note\')&&(item.type!==\'ok_confirm\')" ng-click="sendResponse(item,0)">Cancel</button>' +
 	'</li></ul>';
-	// procedure to add an alert to the buffer
+	// method to add an alert to the buffer
 	var pushToBuffer = function(note) {
 		scope.buffer.push(note);
 		if (!scope.isDisplayed) {
@@ -84,11 +163,67 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 			}
 		},scope.options.delay);
 	};
-	// procedure to air the alert
+	/**
+	 * @ngdoc
+	 * @name notify
+	 * @methodOf notification-service.service:Notification
+	 * @param {Object} note notification object 
+	 * @description 
+	 * 
+	 * Method to get a notification object and display it on the top right corner of the window.
+	 * # Usage
+	 * In your app controller you can call:
+	 * ```javascript
+	 * Notification.notify(note);
+	 * ```
+	 * where ```note``` is an object that must contain following properties:
+	 * * id - id of the notification, type: Int;
+	 * * from - identifier of the emitter, type: String;
+	 * * category: category of the notification, type: String, possible values: 'into', 'warning', 'error';
+	 * * type: type of the notification, type: String, possible values: 'note', 'ok_confirm', 'ok_cancel_confirm';
+	 * * header: title of the notification, type: String;
+	 * * content: content of the notification, type: String.
+	 *
+	 * @example
+	 * ```javascript
+	 * ...
+	 * Notification.notify(
+	 * {
+	 *   id: 1001,
+	 *   from: 'userManagement',
+	 *   category: 'warning',
+	 *   type: 'note',
+	 *   header: 'Subscrition Info'
+	 *   content: 'Your subscription expires in 5 days'
+	 * }
+	 * );
+	 * ...
+	 * ```
+	 */
 	this.notify = function(note) {
 		pushToBuffer(note);
 	};
-	// procedure to get notifications from server
+	/**
+	 * @ngdoc
+	 * @name  getFromServer
+	 * @methodOf notification-service.service:Notification
+	 * @description 
+	 *
+	 * Method to get the notifications array from server and display them on the top right corner of the window.
+	 *
+	 * # Usage
+	 * In your app controller you can call:
+	 * ```javascript
+	 * Notification.getFromServer();
+	 * ```
+	 *
+	 * @example
+	 * ```javascript
+	 * ...
+	 * Notification.getFromServer();
+	 * ...
+	 * ```
+	 */
 	this.getFromServer = function() {
 		$http({
 			url: scope.options.baseUrl + 'list',

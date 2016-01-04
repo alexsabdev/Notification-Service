@@ -1,15 +1,19 @@
-'use_strict';
-
-angular.module('Demo', ['notification-service'])
+/**
+ * @ngdoc object
+ * @name  Demo
+ * @description 
+ *
+ * Module of the example app
+ */
+var app = angular.module('Demo', ['notification-service']);
 /**
  * @ngdoc controller
  * @name Demo.controller:DemoController
  * @description 
  * 
  * This is the main controller of the demo app module.
- * It uses the notification-service and operates with the simulation form.
  */
- .controller('DemoController', ['$scope', 'Notification', function($scope, Notification){
+ app.controller('DemoController', ['$scope', 'Notification', function($scope, Notification){
 	// array to collect the notifications data
 	$scope.notes = [];
 	// object to bind input data

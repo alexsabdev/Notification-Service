@@ -9,15 +9,15 @@ module.exports = function(grunt) {
 			},
 			scripts: {
 				files: 'source/scripts/**/*.js',
-				tasks: ''
+				tasks: 'ngdocs'
 			},
 			styles: {
 				files: 'source/styles/**/*.css',
-				tasks: 	''
+				tasks: ''
 			},
 			html: {
 				files: 'source/*.html',
-				tasks: 	''
+				tasks: ''
 			}
 		},
 		express: {
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 			}
 		},
 		ngdocs: {
-			all: ['source/scripts/notification-service.js', 'source/scripts/demo.js']
+			all: ['source/scripts/notification-service.js']
 		},
 		jshint: {
 			options: {
@@ -76,46 +76,50 @@ module.exports = function(grunt) {
 					banner: '/* My minified CSS */'
 				},
 				files: { 'dist/notification-service-styles.min.css' : ['dist/notification-service-styles.css']
-				}
-			}
-		},
-		useminPrepare: {
-			html: 'source/index.html',
-			options: {
-				dest: 'demo/'
-			}
-		},
-		usemin: {
-			html: ['demo/index.html']
-		},
-		copy: {
-			task0: {
-				src: 'source/index.html',
-				dest: 'demo/index.html'
-			},
-			task1: {
-				src: 'source/scripts/notification-service.js',
-				dest: 'dist/notification-service.js'
-			},
-			task2: {
-				src: 'source/styles/notification-service-styles.css',
-				dest: 'dist/notification-service-styles.css'
 			}
 		}
+	},
+	useminPrepare: {
+		html: 'source/index.html',
+		options: {
+			dest: 'demo/'
+		}
+	},
+	usemin: {
+		html: ['demo/index.html']
+	},
+	copy: {
+		task0: {
+			src: 'source/index.html',
+			dest: 'demo/index.html'
+		},
+		task1: {
+			src: 'source/scripts/notification-service.js',
+			dest: 'dist/notification-service.js'
+		},
+		task2: {
+			src: 'source/styles/notification-service-styles.css',
+			dest: 'dist/notification-service-styles.css'
+		},
+		task3: {
+			src: 'source/json-data/db.json',
+			dest: 'demo/json-data/db.json'
+		}
+	}
 
-	});
+});
 
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-express');
-	grunt.loadNpmTasks('grunt-ngdocs');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-usemin');
-	grunt.loadNpmTasks('grunt-contrib-copy');
+grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-express');
+grunt.loadNpmTasks('grunt-ngdocs');
+grunt.loadNpmTasks('grunt-contrib-jshint');
+grunt.loadNpmTasks('grunt-contrib-concat');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-cssmin');
+grunt.loadNpmTasks('grunt-usemin');
+grunt.loadNpmTasks('grunt-contrib-copy');
 
-	grunt.registerTask('default', ['express', 'watch']);
-	grunt.registerTask('demo', ['copy:task0','useminPrepare','concat','uglify','cssmin', 'usemin']);
-	grunt.registerTask('dist', ['copy:task1', 'copy:task2', 'cssmin', 'uglify']);
+grunt.registerTask('default', ['express', 'watch']);
+grunt.registerTask('demo', ['copy:task0','copy:task3','useminPrepare','concat','uglify','cssmin', 'usemin']);
+grunt.registerTask('dist', ['copy:task1', 'copy:task2', 'cssmin', 'uglify']);
 };

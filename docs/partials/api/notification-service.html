@@ -1,0 +1,45 @@
+<a href="https://github.com/alexsabdev/notification-service/edit/master/source/scripts/notification-service.js" class="improve-docs"><i class="icon-edit"> </i>Improve this doc</a><a href="https://github.com/alexsabdev/notification-service/blob/a97c731/source/scripts/notification-service.js#L51" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">notification-service</code>
+<div><span class="hint"></span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="notification-service-page"><p>Angular.js module providing notifications using Bootstrap 3 styles and having following features:</p>
+<h3 id="description_features">Features</h3>
+<ul>
+<li>it displays notifications as overlay in front of the page;</li>
+<li>the notifications have a title and a body;</li>
+<li>they have different appearance depending on a category;</li>
+<li>max 5 notifications are displayed at the same time by dafault, the number can be changed;</li>
+<li>when the limit is reached, the oldest notification temporary gets off from screen and the latest pops up and after that gets back when there&#39;s a free spot;</li>
+<li>created notifications are closable by clicking;</li>
+<li>they are also closed automatically after 90 seconds by default, the number can be changed;</li>
+<li>the service is able to display notifications with confirmations;</li>
+<li>the service can read data from backend side and can send data to it.</li>
+</ul>
+<h3 id="description_install">Install</h3>
+<ul>
+<li>Simply inject the notification-service to your app module:<pre><code class="lang-javascript">var app = angular.module(&#39;myApp&#39;, [&#39;notification-service&#39;]);
+...
+</code></pre>
+</li>
+<li>And inject its service called &#39;Notification&#39; to the app controller:<pre><code class="lang-javascript">...
+app.controller(&#39;AppController&#39;, [&#39;$scope&#39;, &#39;Notification&#39;, function($scope, Notification){...}]);
+</code></pre>
+</li>
+<li>You need also to download notification-service.js and notification-service-styles.css from the dist folder (or their minified versions). Don&#39;t forget to link downloaded files to your html/template:<pre><code class="lang-html">...
+&lt;link rel=&quot;stylesheet&quot; href=&quot;styles/notification-service-styles.css&quot;&gt;
+...
+&lt;script src=&quot;scripts/notification-service.js&quot;&gt;&lt;/script&gt;
+...
+</code></pre>
+</li>
+<li>The notification-service has ability to read data from server and send user responds to it. In order to use this feature, you need to set baseUrl for your server interface. :<pre><code class="lang-javascript">...
+Notification.setOptions({baseUrl: &#39;http://myserver.com/api/notifications/&#39;})
+...
+</code></pre>
+! notifications will be fetched using interface: baseUrl + &#39;/list&#39;;<br />
+! user responds will be sent using interface: baseUrl + &#39;/confirm&#39;.<h3 id="description_usage">Usage</h3>
+The module contains the service named Notification having 3 public methods. You can call them in your app controller in order to get corresponding effect. Please refer to the Notification service section for details.</li>
+</ul>
+</div></div>
+</div>
