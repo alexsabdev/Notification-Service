@@ -81,7 +81,9 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 	 * # Usage
 	 * In your app controller you can call:
 	 * ```javascript
+	 * ...
 	 * Notification.setOptions(opts);
+	 * ...
 	 * ```
 	 * where ```opts``` is an object that can contain following properties:
 	 * * delay - delay of the notification in ms, type: Int;
@@ -214,7 +216,9 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 	 * # Usage
 	 * In your app controller you can call:
 	 * ```javascript
+	 * ...
 	 * Notification.getFromServer();
+	 * ...
 	 * ```
 	 *
 	 * @example

@@ -1,51 +1,109 @@
 notification-service
 =======================
 ## Description
-notification-service - angular.js service providing notifications using Bootstrap 3 styles with smooth css transition animation. 
-* author alexsabdev (alexsabdev@gmail.com)
+Angular.js module providing notifications using Bootstrap 3 styles.
+* author alexsabdev <alexsabdev@gmail.com>
 * version v1.0.0
 * link https://github.com/alexsabdev/notification-service.git
-* dependencies: no dependencies, it works as a separate module, ready to be injected
+* dependencies: no external dependencies, it works as a separate module, ready to be injected
 
 ## Features
-* tt displays notifications as overlay in fromt of the page;
+* it displays notifications as overlay in front of the page;
 * the notifications have a title and a body;
 * they have different appearance depending on a category;
-* max 5 notifications are displayed at the same time;
+* max 5 notifications are displayed at the same time by dafault, the number can be changed;
 * when the limit is reached, the oldest notification temporary gets off from screen and the latest pops up and after that gets back when there's a free spot;
 * created notifications are closable by clicking;
-* they are also closed automatically after 90 seconds.
+* they are also closed automatically after 90 seconds by default, the number can be changed;
+* the service is able to display notifications with confirmations;
+* the service can read data from backend side and can send data to it.
 
-## How to use:
-* Simply inject the notification-service to your app module:
-```bash
+## Installation
+Simply inject the notification-service module to your app module:
+```javascript
 var app = angular.module('myApp', ['notification-service']);
 ...
 ```
-* And inject its service called 'Notification' to the app controller:
-```bash
+And inject its service called 'Notification' to the app controller:
+```javascript
 ...
 app.controller('AppController', ['$scope', 'Notification', function($scope, Notification){...}]);
 ```
-* You need also to download notification-service.js and notification-service-styles.css from the dist folder (or their minified versions). Don't forget to link downloaded files to your html/template:
-```bash
+You need also to download notification-service.js and notification-service-styles.css from the dist folder (or their minified versions). Don't forget to link downloaded files to your html/template:
+```html
 ...
 <link rel="stylesheet" href="styles/notification-service-styles.css">
 ...
 <script src="scripts/notification-service.js"></script>
 ...
 ```
-* After injection, when you need to show a notification, within the app controller call:
-```bash
+The notification-service has ability to read data from server and send user responds to it. In order to correctly use this feature, you need to set baseUrl for your server interface. For example :
+```javascript
 ...
-Notification.notify(note);
+Notification.setOptions({baseUrl: 'http://myserver.com/api/notifications/'})
 ...
 ```
-where note is a notification object consisting of following properties. All of them are required.
-<br />   id: The id of the notification message.
-<br />   category: Category of the notification message. Possible categories are “info”, “warning” and “error”.
-<br />   header: Header of the notification.
-<br />   content: Content of the notification.
+! notifications will be fetched using interface: baseUrl + '/list';<br />
+! user responds will be sent using interface: baseUrl + '/confirm'.
+
+## Usage
+
+1) In order to show a notification, you can call in your app controller:
+```javascript
+Notification.notify(note);
+```
+where 'note' is an object that MUST contain following properties:
+* id - id of the notification, type: Int;
+* from - identifier of the emitter, type: String;
+* category: category of the notification, type: String, possible values: 'into', 'warning', 'error';
+* type: type of the notification, type: String, possible values: 'note', 'ok_confirm', 'ok_cancel_confirm';
+* header: title of the notification, type: String;
+* content: content of the notification, type: String.
+<br /> For xample:
+```javascript
+...
+Notification.notify(
+{
+	id: 1001,
+	from: 'userManagement',
+	category: 'warning',
+	type: 'note',
+	header: 'Subscrition Info'
+	content: 'Your subscription expires in 5 days'
+}
+);
+...
+```
+2) In order to fetch notifications from your server, you can call in your app controller:
+```javascript
+...
+Notification.getFromServer();
+...
+```
+3) In order to change default options of the server (delay, limit and baseUrl), you can call in your app controller:
+```javascript
+...
+Notification.setOptions(opts);
+...
+```
+where 'opts' is an object that can contain following properties:
+* delay - delay of the notification in ms, type: Int;
+* limit - max amount of notifications on screen at the same time, type: Int;
+* baseUrl - path to the server to get notifications from, type: String. Please mind:<br />
+! notifications will be fetched using interface: baseUrl + '/list';<br />
+! user responds will be sent using interface: baseUrl + '/confirm'<br />
+For example:
+```javascript
+...
+Notification.setOptions(
+{
+  delay: 45000,
+  limit: 3,
+  baseUrl: http://website.com/api/notifications'
+}
+);
+...
+```
 
 ## Table of Contents
 
@@ -53,8 +111,16 @@ where note is a notification object consisting of following properties. All of t
 * source: folder with source code of the notification-service and the demo app;
 * demo: folder with demo app - feel free to play around!
 * dist: notification-service module files (js and css) including their minified versions.
-* docs: autogenerated documentation ngdoc; please refer to the README.md for more detailed description;
-* test: test folder, unit testing;
+* docs: autogenerated documentation ngdoc; in order to read the docs, clone the repo, then cd to it and install dependencies:
+```bash
+npm install
+```
+in particularly, t will install grunt locally. After that run grunt by typing:
+```bash
+npm install
+```
+and in your browser go to "http://localhost:9000/docs"
+* test: test folder including e2e tesing using protractor;
 * gruntfile.js, .gitignore, bower.json, package.json: just boring service files;
 * README.md: instructions on usage of the notification module and the present folder.
 
@@ -62,4 +128,4 @@ where note is a notification object consisting of following properties. All of t
 Thanks to T-Systems for the code challenge. <br />
 Please get in touch with me if your have proposals how to modify the service.<br />
 Thanks! <br />
-Pleas around and have fun!
+Play around and have fun!
