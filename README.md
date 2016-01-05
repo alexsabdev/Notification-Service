@@ -117,10 +117,20 @@ npm install
 ```
 in particularly, t will install grunt locally. After that run grunt by typing:
 ```bash
-npm install
+grunt
 ```
 and in your browser go to "http://localhost:9000/docs"
-* test: test folder including e2e tesing using protractor;
+* test: test folder including e2e tests using protractor; to see the tests in action it's necessary to run the app server and the server with json-data. When being in the rep folder, in one terminal window please type
+```bash
+npm install
+grunt
+```
+it will start the app server at "http://localhost:9000/". After that you should start the server with json-data. In second terminal window please type:
+```bash
+cd test/
+json-server --watch db-json
+```
+Finally now you can perform e2e tests using protractor.
 * gruntfile.js, .gitignore, bower.json, package.json: just boring service files;
 * README.md: instructions on usage of the notification module and the present folder.
 
