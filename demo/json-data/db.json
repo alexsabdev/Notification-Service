@@ -57,11 +57,5 @@
       "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, sint."
     }
   ],
-  "confirm": [
-    {
-      "id": 102,
-      "from": "userManagement",
-      "result": 1
-    }
-  ]
+  "confirm": []
 }

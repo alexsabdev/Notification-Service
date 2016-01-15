@@ -81,9 +81,7 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 	 * # Usage
 	 * In your app controller you can call:
 	 * ```javascript
-	 * ...
 	 * Notification.setOptions(opts);
-	 * ...
 	 * ```
 	 * where ```opts``` is an object that can contain following properties:
 	 * * delay - delay of the notification in ms, type: Int;
@@ -111,11 +109,17 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 	};
 	// array to keep track of incoming alerts
 	scope.buffer = [];
+	// array to keep track of set timeouts
+	scope.timeoutsBuffer = [];
 	// variable to keep track if the notification area is displayed or not
 	scope.isDisplayed = false;
 	// method to kill the alert
 	scope.kill = function(item) {
-		scope.buffer.splice(scope.buffer.indexOf(item), 1);
+		var index = scope.buffer.indexOf(item);
+		scope.buffer.splice(index, 1);
+		var to = scope.timeoutsBuffer[index];
+		$timeout.cancel(to);
+		scope.timeoutsBuffer.splice(index, 1);
 		if (scope.buffer.length === 0) {
 			scope.isDisplayed = false;
 			angular.element(document.getElementById('notification-area')).remove();
@@ -157,13 +161,15 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 			angular.element(document.getElementsByTagName('body')).append($compile(template)(scope));
 			scope.isDisplayed = true;
 		}
-		$timeout(function() {
+		var to = $timeout(function() {
 			scope.buffer.splice(scope.buffer.indexOf(note),1);
+			scope.timeoutsBuffer.splice(scope.buffer.indexOf(note),1);
 			if (scope.buffer.length === 0) {
 				scope.isDisplayed = false;
 				angular.element(document.getElementById('notification-area')).remove();
 			}
 		},scope.options.delay);
+		scope.timeoutsBuffer.push(to);
 	};
 	/**
 	 * @ngdoc
@@ -216,9 +222,7 @@ nsModule.service('Notification', ['$rootScope', '$compile', '$http', '$timeout',
 	 * # Usage
 	 * In your app controller you can call:
 	 * ```javascript
-	 * ...
 	 * Notification.getFromServer();
-	 * ...
 	 * ```
 	 *
 	 * @example
